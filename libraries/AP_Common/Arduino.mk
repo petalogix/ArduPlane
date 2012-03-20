@@ -225,10 +225,12 @@ ifeq ($(shell which $(AWK)),)
 $(error ERROR: cannot find $(AWK) - you may need to install GNU awk)
 endif
 
+VERFLAGS:=-DTHISFIRMWARE=\"$(shell if git status > /dev/null 2>&1; then git describe --dirty; else echo ""; fi):$@\"
+
 #
 # Tool options
 #
-DEFINES			=	-DF_CPU=$(F_CPU) -DARDUINO=$(ARDUINO_VERS) $(EXTRAFLAGS)
+DEFINES			=	-DF_CPU=$(F_CPU) -DARDUINO=$(ARDUINO_VERS) $(EXTRAFLAGS) $(VERFLAGS)
 OPTFLAGS		=	-Os -Wformat -Wall -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -Wformat=2 -Wno-reorder
 DEPFLAGS		=	-MD -MT $@
 
