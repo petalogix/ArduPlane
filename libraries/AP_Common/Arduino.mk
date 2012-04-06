@@ -225,7 +225,7 @@ ifeq ($(shell which $(AWK)),)
 $(error ERROR: cannot find $(AWK) - you may need to install GNU awk)
 endif
 
-VERFLAGS:=-DTHISFIRMWARE=\"$(shell if git status > /dev/null 2>&1; then git describe --dirty; else echo ""; fi):$@\"
+VERFLAGS:=-DTHISFIRMWARE=\"$(shell if git status > /dev/null 2>&1; then git describe --dirty; else echo ""; fi)\"
 
 #
 # Tool options
